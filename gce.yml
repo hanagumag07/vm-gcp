@@ -1,0 +1,21 @@
+- name: Create an instance
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars:
+      project_id: xxxxxxxxxx
+      service_account_file: xxxxxxxxx 
+      service_account_email: xxxxxxxxx 
+      zone: "asia-northeast1-c"
+
+  tasks:
+    - name: Create an instance
+      gce:
+        instance_names: "ansible-test"
+        machine_type: "f1-micro"
+        image: "ubuntu-1604"
+        zone: "{{ zone }}"
+        disk_size: 64
+        service_account_email: "{{service_account_email}}"
+        credentials_file: "{{service_account_file}}"
+        project_id: "{{ project_id }}"
